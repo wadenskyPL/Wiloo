@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiloo - Jesyon ak Fich Pwodui</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside>
+        <div class="logo-area">
+            <h1>Wi<span>loo</span></h1>
+            <nav>
+                <a href="index.html">📊 Tablo Bò (Dashboard)</a>
+                <a href="produit.html" class="active">🔍 Rechèch & Fich Pwodui</a>
+                <a href="requisitions.html">📝 Rekizisyon yo</a>
+            </nav>
+        </div>
+        <div class="user-footer" style="font-size: 12px; color: #64748B;">
+            Sistèm Wiloo v1.0
+        </div>
+    </aside>
+
+    <!-- MAIN SECTION -->
+    <main>
+        <header>
+            <h2>Katalòg ak Suivi Pwodui</h2>
+            <div class="user-profile">
+                👤 Magajinyè (Matricule: 310001)
+            </div>
+        </header>
+
+        <div class="content-body">
+            
+            <!-- 1. ZÒN RECHÈCH PWODUI -->
+            <div class="card" style="margin-bottom: 24px;">
+                <h3 style="color: var(--primary-navy); margin-bottom: 12px;">Chache yon Pwodui</h3>
+                <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 14px;">Tape non pwodui a oswa kòd inik li (Egzanp: MAN-2026-0001 oswa Diri)</p>
+                
+                <div style="display: flex; gap: 12px;">
+                    <input type="text" id="searchInput" placeholder="Antre kòd la oswa non pwodui a..." style="flex: 1; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;">
+                    <button class="btn btn-navy" onclick="chercherPwodui()">Chache</button>
+                </div>
+            </div>
+
+            <!-- 2. FICH PWODVI A (Rezilta Rechèch la) -->
+            <div class="card" id="fichPwoduiCard" style="margin-bottom: 24px; display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 16px;">
+                    <div>
+                        <span id="badgeCode" style="background-color: var(--primary-navy); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">MAN-2026-0001</span>
+                        <h2 id="nomPwoduiTitre" style="color: var(--primary-navy); margin-top: 8px;">Diri Wawa 50KG</h2>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Fòm: <span id="formPwodui">Sak</span> | Kategori: <span id="catPwodui">Manje</span></p>
+                    </div>
+                    <div>
+                        <span id="statutStockBadge" style="background-color: var(--accent-green); color: white; padding: 6px 12px; border-radius: var(--radius); font-size: 12px; font-weight: 600;">Nan Stock</span>
+                    </div>
+                </div>
+
+                <!-- Tablo Kantite ak Lokalizasyon -->
+                <h4 style="color: var(--primary-navy); margin-bottom: 12px;">Kantite nan chak Depo & Dat Peremption</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Depo / Lokalizasyon</th>
+                            <th>Nimewo Lot (Batch)</th>
+                            <th>Dat Ekspirasyon</th>
+                            <th>Kantite Aktyèl</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stockLokalisationTable">
+                        <tr>
+                            <td>Depo Prensipal A</td>
+                            <td>LOT-9920</td>
+                            <td style="color: var(--danger-red); font-weight: 600;">2026-11-15</td>
+                            <td><strong>45 Sak</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Pwen Vant Caisse</td>
+                            <td>LOT-9920</td>
+                            <td>2026-11-15</td>
+                            <td><strong>10 Sak</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 3. OPERASYON SOU STOCK (Transfè ak Retrè) -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                
+                <!-- A. Fè yon Transfè Ant Depo -->
+                <div class="card">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">🚚 Fè yon Transfè Depo</h3>
+                    <form id="transfertForm">
+                        <div style="margin-bottom: 12px;">
+                            <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;">Soti nan Depo (A):</label>
+                            <select style="width: 100%; padding: 8px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 13px;">
+                                <option value="1">Depo Prensipal A</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;">Ale nan Depo (B):</label>
+                            <select style="width: 100%; padding: 8px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 13px;">
+                                <option value="2">Pwen Vant Caisse</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;">Kantite pou deplase:</label>
+                            <input type="number" placeholder="Egzanp: 5" style="width: 100%; padding: 8px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 13px;">
+                        </div>
+                        <button type="button" class="btn btn-navy" style="width: 100%;">Egzekite Transfè a</button>
+                    </form>
+                </div>
+
+                <!-- B. Retire Pwodui (Casse, Domaje, oswa Itilize) -->
+                <div class="card">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">⚠️ Retire Pwodui (Casse / Sòti)</h3>
+                    <form id="retraitForm">
+                        <div style="margin-bottom: 12px;">
+                            <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;">Depo:</label>
+                            <select style="width: 100%; padding: 8px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 13px;">
+                                <option value="1">Depo Prensipal A</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;">Kantite pou retire:</label>
+                            <input type="number" placeholder="Egzanp: 2" style="width: 100%; padding: 8px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 13px;">
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px;">Eksplikasyon / Motif:</label>
+                            <input type="text" placeholder="Egzanp: Pwodui ki gate oswa sak dechire" style="width: 100%; padding: 8px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 13px;">
+                        </div>
+                        <button type="button" class="btn" style="background-color: var(--danger-red); color: white; width: 100%;">Anrejistre Retrè a</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Ti lojik JavaScript senp pou similye afichaj fich la lè w ap chache -->
+    <script>
+        function chercherPwodui() {
+            const val = document.getElementById('searchInput').value;
+            const fich = document.getElementById('fichPwoduiCard');
+            // Pou moman an, kèlkeswa sa w tape a, l ap afiche fich la pou montre w kijan l ap parèt
+            if(val.trim() !== "") {
+                fich.style.display = "block";
+            } else {
+                alert("Tanpri antre yon kòd oswa non pwodui.");
+            }
+        }
+    </script>
+</body>
+</html>
