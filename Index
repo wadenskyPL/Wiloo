@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiloo - Jesyon Stock Pwofesyonèl</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside>
+        <div class="logo-area">
+            <h1>Wi<span>loo</span></h1>
+            <nav>
+                <a href="index.html" class="active">📊 Tablo Bò (Dashboard)</a>
+                <a href="stock.html">📦 Eta Stock a</a>
+                <a href="requisitions.html">📝 Rekizisyon yo</a>
+            </nav>
+        </div>
+        <div class="user-footer" style="font-size: 12px; color: #64748B;">
+            Sistèm Wiloo v1.0
+        </div>
+    </aside>
+
+    <!-- MAIN SECTION -->
+    <main>
+        <header>
+            <h2>Tablo Bò Prensipal</h2>
+            <div class="user-profile">
+                Byenveni, 👤 Magajinyè (Matricule: 310001)
+            </div>
+        </header>
+
+        <div class="content-body">
+            <div class="card">
+                <h3 style="color: var(--primary-navy); margin-bottom: 12px;">Aksyon Rapid</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Chwazi yon aksyon pou w kòmanse jere stock la oswa voye yon demann.</p>
+                
+                <div style="display: flex; gap: 16px;">
+                    <a href="requisitions.html" class="btn btn-primary">+ Fè yon nouvo Rekizisyon</a>
+                    <a href="stock.html" class="btn btn-navy">Konsilte Depo yo</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
