@@ -1,0 +1,162 @@
+/* ===================================================================
+   WILOO DESIGN SYSTEM & UX STANDARDS
+   =================================================================== */
+
+:root {
+    --primary-navy: #0A192F;      /* Bleu Marine Prensipal */
+    --secondary-navy: #172A45;    /* Bleu Marine Dòmi / Hover */
+    --accent-green: #10B981;      /* Vèt Endikatè & Siksè */
+    --accent-green-hover: #059669;
+    --bg-light: #F8FAFC;          /* Blan / Gris trè klè pou Background */
+    --card-bg: #FFFFFF;           /* Blan Pòp pou Kat ak Tablo */
+    --text-main: #334155;         /* Tèks nòmal (Dark Slate) */
+    --text-muted: #64748B;        /* Tèks segondè */
+    --danger-red: #EF4444;        /* Pou alèt oswa anilasyon */
+    --border-color: #E2E8F0;
+    --radius: 8px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- SIDEBAR (Navigasyon an Bèf) --- */
+aside {
+    width: 260px;
+    background-color: var(--primary-navy);
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+aside .logo-area h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    margin-bottom: 32px;
+}
+
+aside .logo-area h1 span {
+    color: var(--accent-green);
+}
+
+aside nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #94A3B8;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+aside nav a:hover, aside nav a.active {
+    background-color: var(--secondary-navy);
+    color: #FFFFFF;
+}
+
+/* --- MAIN CONTENT AREA --- */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+header {
+    background-color: var(--card-bg);
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .user-profile {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-navy);
+}
+
+.content-body {
+    padding: 32px;
+}
+
+/* --- BUTTONS & CONTROLS (UX Focus) --- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--accent-green);
+    color: #FFFFFF;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-green-hover);
+}
+
+.btn-navy {
+    background-color: var(--primary-navy);
+    color: #FFFFFF;
+}
+
+.btn-navy:hover {
+    background-color: var(--secondary-navy);
+}
+
+/* --- TABLES & CARDS --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    border: 1px solid var(--border-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
+th {
+    background-color: #F1F5F9;
+    color: var(--primary-navy);
+    font-weight: 600;
+}
