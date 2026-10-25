@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiloo - Fè yon Rekizisyon</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside>
+        <div class="logo-area">
+            <h1>Wi<span>loo</span></h1>
+            <nav>
+                <a href="index.html">📊 Tablo Bò (Dashboard)</a>
+                <a href="stock.html">📦 Eta Stock a</a>
+                <a href="requisitions.html" class="active">📝 Rekizisyon yo</a>
+            </nav>
+        </div>
+        <div class="user-footer" style="font-size: 12px; color: #64748B;">
+            Sistèm Wiloo v1.0
+        </div>
+    </aside>
+
+    <!-- MAIN SECTION -->
+    <main>
+        <header>
+            <h2>Jesyon Rekizisyon Entèn</h2>
+            <div class="user-profile">
+                👤 Magajinyè (Matricule: 310001)
+            </div>
+        </header>
+
+        <div class="content-body">
+            
+            <!-- FÒM POU VOYE REKIZISYON -->
+            <div class="card" style="margin-bottom: 24px;">
+                <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Nouvo Demann Materyèl</h3>
+                
+                <form id="requisitionForm">
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Atik ou Bezwen an:</label>
+                        <select style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;">
+                            <option value="">-- Chwazi yon atik nan stock --</option>
+                            <option value="1">MAN-2026-0001 - Diri Wawa 50KG</option>
+                            <option value="2">MED-2026-0002 - Paracetamol Bwat</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Kantite:</label>
+                        <input type="number" placeholder="Egzanp: 5" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;">
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Motif Demann lan:</label>
+                        <textarea placeholder="Poukisa w bezwen materyèl sa a?" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px; height: 80px;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Voye Rekizisyon an</button>
+                </form>
+            </div>
+
+            <!-- TABLO LISTE REKIZISYON YO -->
+            <div class="card">
+                <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Istwa Rekizisyon ki sot pase yo</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° Rekizisyon</th>
+                            <th>Moun ki Mande l</th>
+                            <th>Dat</th>
+                            <th>Estati</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>REQ-2026-0001</td>
+                            <td>310001 - Claudine</td>
+                            <td>2026-06-07</td>
+                            <td><span style="color: #D97706; font-weight: 600;">An Attant</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
