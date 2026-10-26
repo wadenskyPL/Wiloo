@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiloo - Tablo Kontwòl Administratif (Admin Panel)</title>
+    <title>Wiloo - Pòt Administratif (Admin)</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .admin-section { margin-bottom: 32px; }
         .badge-active { background-color: var(--accent-green); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
         .badge-banned { background-color: var(--danger-red); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
         .tab-buttons { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -22,10 +21,10 @@
             <h1>Wi<span>loo</span></h1>
             <nav>
                 <a href="index.html">📊 Tablo Bò (Dashboard)</a>
-                <a href="produit.html">🔍 Rechèch & Fich Pwodui</a>
+                <a href="produit.html">🔍 Rechèch & Liste Pwodui</a>
                 <a href="nouvo-pwodui.html">➕ Anrejistre Pwodui</a>
                 <a href="requisitions.html">📝 Rekizisyon yo</a>
-                <a href="admin.html" class="active">🛡️ Pòt Administratif (Admin)</a>
+                <a href="admin.html" class="active">🛡️ Admin</a>
             </nav>
         </div>
         <div class="user-footer" style="font-size: 12px; color: #64748B;">
@@ -38,165 +37,79 @@
         <header>
             <h2>Tablo Kontwòl Administratif</h2>
             <div class="user-profile">
-                👑 Admin (Matricule: 310001)
+                👑 Admin
             </div>
         </header>
 
         <div class="content-body">
             
-            <!-- MENU 3N 3ONGLET POU EVITE TÈP PAJ -->
             <div class="tab-buttons">
-                <button class="tab-btn active" onclick="chanjeTab(event, 'usersTab')">👥 Itilizatè yo</button>
+                <button class="tab-btn active" onclick="chanjeTab(event, 'produitsTab')">📦 Liste Pwodui & Ekspirasyon</button>
+                <button class="tab-btn" onclick="chanjeTab(event, 'usersTab')">👥 Itilizatè yo</button>
                 <button class="tab-btn" onclick="chanjeTab(event, 'localisationsTab')">🏢 Depo & Lokalizasyon</button>
-                <button class="tab-btn" onclick="chanjeTab(event, 'produitsTab')">⚠️ Pwodui & Ekspirasyon</button>
-                <button class="tab-btn" onclick="chanjeTab(event, 'suiviTab')">📜 Rekizisyon & Mouvman</button>
             </div>
 
-            <!-- 1. TAB ITILIZATÈ YO -->
-            <div id="usersTab" class="admin-tab-content">
+            <!-- 1. TAB PWODUI (LISTE REYÈL SOTI NAN SQL) -->
+            <div id="produitsTab" class="admin-tab-content">
                 <div class="card">
-                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Jesyon Itilizatè ak Dwa Yo</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Matricule</th>
-                                <th>Non & Prenom</th>
-                                <th>Telefòn</th>
-                                <th>Wòl (Dwa)</th>
-                                <th>Estati</th>
-                                <th>Aksyon</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>310001</strong></td>
-                                <td>Claudine Pierre-Louis</td>
-                                <td>+509 3700-0000</td>
-                                <td><select style="padding: 4px; border-radius: 4px;"><option>Admin</option><option selected>Gestionnaire</option><option>Magasinier</option></select></td>
-                                <td><span class="badge-active">Aktif</span></td>
-                                <td>
-                                    <button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Bani</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 2. TAB LOKALIZASYON / DEPO -->
-            <div id="localisationsTab" class="admin-tab-content" style="display: none;">
-                <div class="card">
-                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Kontwòl Depo ak Zòn Stockaj</h3>
-                    
-                    <div style="margin-bottom: 20px; display: flex; gap: 12px;">
-                        <input type="text" placeholder="Non nouvo depo a..." style="padding: 8px; border-radius: var(--radius); border: 1px solid var(--border-color); flex: 1;">
-                        <button class="btn btn-primary">+ Ajoute yon Depo</button>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Non Depo / Lokalizasyon</th>
-                                <th>Tip Zòn</th>
-                                <th>Aksyon</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Depo Prensipal A</td>
-                                <td>Depot</td>
-                                <td>
-                                    <button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Enfim / Bani Depo</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Pwen Vant Caisse</td>
-                                <td>Zone Transit</td>
-                                <td>
-                                    <button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Enfim / Bani Depo</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 3. TAB PWODUI & EKSPIRASYON -->
-            <div id="produitsTab" class="admin-tab-content" style="display: none;">
-                <div class="card">
-                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Pwodui ki Ekspire & Kontwòl Katalog</h3>
-                    <p style="color: var(--danger-red); font-size: 13px; margin-bottom: 16px;">⚠️ Lis pwodui sa yo depase dat peremption yo oswa prèt pou ekspire:</p>
-                    
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Liste Tout Pwodui nan Baz Done a</h3>
                     <table>
                         <thead>
                             <tr>
                                 <th>Kòd Pwodui</th>
                                 <th>Non Pwodui</th>
+                                <th>Stock</th>
                                 <th>Nimewo Lot</th>
                                 <th>Dat Ekspirasyon</th>
-                                <th>Aksyon Administratif</th>
+                                <th>Aksyon</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>MED-2026-0002</strong></td>
-                                <td>Paracetamol Bwat</td>
-                                <td>LOT-EXP-88</td>
-                                <td style="color: var(--danger-red); font-weight: 700;">2026-01-10 (Ekspire)</td>
-                                <td>
-                                    <button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Retire / Delete Pwodui</button>
-                                </td>
-                            </tr>
+                        <tbody id="listeProduitsTbody">
+                            <tr><td colspan="6">K ap chaje pwodui yo soti nan Neon SQL...</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 4. TAB REKIZISYON AK MOUVMAN -->
-            <div id="suiviTab" class="admin-tab-content" style="display: none;">
-                <div class="card" style="margin-bottom: 24px;">
-                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Rekizisyon ki Fèt yo</h3>
+            <!-- 2. TAB ITILIZATÈ -->
+            <div id="usersTab" class="admin-tab-content" style="display: none;">
+                <div class="card">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Jesyon Itilizatè yo</h3>
                     <table>
                         <thead>
                             <tr>
-                                <th>N° Rekizisyon</th>
-                                <th>Moun ki Mande l</th>
-                                <th>Dat Demann</th>
+                                <th>Matricule</th>
+                                <th>Non & Prenom</th>
+                                <th>Wòl</th>
                                 <th>Estati</th>
+                                <th>Aksyon</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>REQ-2026-0001</td>
-                                <td>310001 - Claudine</td>
-                                <td>2026-06-07</td>
-                                <td><span style="color: #D97706; font-weight: 600;">An Attant</span></td>
-                            </tr>
+                        <tbody id="listeUsersTbody">
+                            <tr><td colspan="5">K ap chaje itilizatè yo...</td></tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
 
+            <!-- 3. TAB DEPO -->
+            <div id="localisationsTab" class="admin-tab-content" style="display: none;">
                 <div class="card">
-                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Istwa Mouvman Stock yo (Traçabilité)</h3>
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Kontwòl Depo yo</h3>
+                    <div style="margin-bottom: 20px; display: flex; gap: 12px;">
+                        <input type="text" id="newDepoInput" placeholder="Non nouvo depo a..." style="padding: 8px; border-radius: var(--radius); border: 1px solid var(--border-color); flex: 1;">
+                        <button class="btn btn-primary" id="btnAddDepo">+ Ajoute yon Depo</button>
+                    </div>
                     <table>
                         <thead>
                             <tr>
-                                <th>ID Atik</th>
-                                <th>Tip Mouvman</th>
-                                <th>Kantite</th>
-                                <th>Dat ak Lè</th>
+                                <th>ID</th>
+                                <th>Non Depo</th>
+                                <th>Aksyon</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>MAN-2026-0001</td>
-                                <td><span style="color: var(--accent-green); font-weight: 600;">ENTREE</span></td>
-                                <td>100 Sak</td>
-                                <td>2026-06-01 14:30</td>
-                            </tr>
+                        <tbody id="listeDepotsTbody">
+                            <tr><td colspan="3">K ap chaje depo yo...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -205,20 +118,65 @@
         </div>
     </main>
 
-    <!-- SCRIPT POU CHANJE ONGLET YO -->
-    <script>
-        function chanjeTab(evt, tabName) {
-            const contents = document.getElementsByClassName("admin-tab-content");
-            for (let i = 0; i < contents.length; i++) {
-                contents[i].style.display = "none";
+    <!-- SCRIPT KONEKSYON AK NEON SQL -->
+    <script src="assets/js/app.js"></script>
+    <script type="module">
+        import { runQuery } from './assets/js/db.js';
+
+        // Lè paj la ouvri, fè SELECT pou ranpli tablo yo
+        document.addEventListener("DOMContentLoaded", async function() {
+            await chajeProduits();
+            await chajeUsers();
+            await chajeDepots();
+        });
+
+        // 1. SELECT POU LISTE PWODUI YO
+        async function chajeProduits() {
+            const tbody = document.getElementById("listeProduitsTbody");
+            const data = await runQuery("SELECT code_produit, nom_article, stock_actuel, numero_lot, date_peremption FROM products ORDER BY id DESC;");
+            
+            if (data && data.length > 0) {
+                tbody.innerHTML = "";
+                data.forEach(p => {
+                    const isExpired = p.date_peremption && new Date(p.date_peremption) < new Date();
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><strong>${p.code_produit || 'N/A'}</strong></td>
+                            <td>${p.nom_article}</td>
+                            <td>${p.stock_actuel}</td>
+                            <td>${p.numero_lot || '-'}</td>
+                            <td style="${isExpired ? 'color: var(--danger-red); font-weight:bold;' : ''}">${p.date_peremption || 'N/A'} ${isExpired ? '(Ekspire)' : ''}</td>
+                            <td>
+                                <button onclick="deleteProduct('${p.code_produit}')" class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Retire / Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = "<tr><td colspan='6'>Pa gen okenn pwodui nan baz done a kounye a.</td></tr>";
             }
-            const buttons = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].className = buttons[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
         }
-    </script>
-</body>
-</html>
+
+        // 2. SELECT POU LISTE ITILIZATÈ YO
+        async function chajeUsers() {
+            const tbody = document.getElementById("listeUsersTbody");
+            const users = await runQuery("SELECT matricule, nom, prenom, role, statut FROM users;");
+            if (users && users.length > 0) {
+                tbody.innerHTML = "";
+                users.forEach(u => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><strong>${u.matricule}</strong></td>
+                            <td>${u.prenom} ${u.nom}</td>
+                            <td>${u.role}</td>
+                            <td><span class="badge-${u.statut === 'Actif' ? 'active' : 'banned'}">${u.statut}</span></td>
+                            <td><button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Bani</button></td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = "<tr><td colspan='5'>Pa gen itilizatè anrejistre.</td></tr>";
+            }
+        }
+
+        // 3. SELECT POU LISTE DEPO
