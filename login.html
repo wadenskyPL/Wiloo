@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiloo - Koneksyon nan Sistèm nan</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: var(--primary-navy);
+        }
+        .login-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-card h1 {
+            text-align: center;
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+        .login-card h1 span {
+            color: var(--accent-green);
+        }
+        .login-card p {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h1>Wi<span>loo</span></h1>
+        <p>Sistèm Jesyon Stock Pwofesyonèl</p>
+
+        <form id="loginForm">
+            <div style="margin-bottom: 16px;">
+                <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Matricule (Egzanp: 310001):</label>
+                <input type="text" id="matriculeInput" placeholder="Tape matricule ou..." style="width: 100%; padding: 12px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;" required>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Modpas:</label>
+                <input type="password" id="passwordInput" placeholder="Tape modpas ou..." style="width: 100%; padding: 12px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 16px;">Konekte sou Wiloo</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 16px;">
+            <a href="#" style="font-size: 12px; color: var(--text-muted); text-decoration: none;">Ou bliye modpas ou? Kontakte Admin lan</a>
+        </div>
+    </div>
+
+    <!-- Lojik JavaScript pou Koneksyon -->
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const matricule = document.getElementById('matriculeInput').value.trim();
+            const password = document.getElementById('passwordInput').value;
+
+            // Tcheke si matricule a kòmanse ak 31 jan nou te deside l la
+            if(matricule.startsWith('31') && matricule.length === 6) {
+                alert("Byenveni! Koneksyon an reyisi pou matricule: " + matricule);
+                // Voye itilizatè a sou Dashboard la
+                window.location.href = "index.html";
+            } else {
+                alert("Erè: Matricule a dwe gen 6 chif epi kòmanse ak '31' (Egzanp: 310001).");
+            }
+        });
+    </script>
+
+</body>
+</html>
