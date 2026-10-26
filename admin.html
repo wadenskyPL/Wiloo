@@ -179,4 +179,34 @@
             }
         }
 
-        // 3. SELECT POU LISTE DEPO
+        // 3. SELECT POU LISTE DEPO YO
+        async function chajeDepots() {
+            const tbody = document.getElementById("listeDepotsTbody");
+            const depots = await runQuery("SELECT id, nom_depot FROM localisations;");
+            if (depots && depots.length > 0) {
+                tbody.innerHTML = "";
+                depots.forEach(d => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${d.id}</td>
+                            <td>${d.nom_depot}</td>
+                            <td><button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Enfim</button></td>
+                        </tr>
+                    `;
+                });
+            } else {
+                tbody.innerHTML = "<tr><td colspan='3'>Pa gen okenn depo kounye a.</td></tr>";
+            }
+        }
+
+        window.chanjeTab = function(evt, tabName) {
+            const contents = document.getElementsByClassName("admin-tab-content");
+            for (let i = 0; i < contents.length; i++) contents[i].style.display = "none";
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) buttons[i].className = buttons[i].className.replace(" active", "");
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        };
+    </script>
+</body>
+</html>
