@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiloo - Tablo Kontwòl Administratif (Admin Panel)</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .admin-section { margin-bottom: 32px; }
+        .badge-active { background-color: var(--accent-green); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .badge-banned { background-color: var(--danger-red); color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .tab-buttons { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tab-btn { background-color: var(--border-color); color: var(--text-main); border: none; padding: 10px 16px; border-radius: var(--radius); cursor: pointer; font-weight: 600; }
+        .tab-btn.active { background-color: var(--primary-navy); color: white; }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside>
+        <div class="logo-area">
+            <h1>Wi<span>loo</span></h1>
+            <nav>
+                <a href="index.html">📊 Tablo Bò (Dashboard)</a>
+                <a href="produit.html">🔍 Rechèch & Fich Pwodui</a>
+                <a href="nouvo-pwodui.html">➕ Anrejistre Pwodui</a>
+                <a href="requisitions.html">📝 Rekizisyon yo</a>
+                <a href="admin.html" class="active">🛡️ Pòt Administratif (Admin)</a>
+            </nav>
+        </div>
+        <div class="user-footer" style="font-size: 12px; color: #64748B;">
+            Sistèm Wiloo v1.0
+        </div>
+    </aside>
+
+    <!-- MAIN SECTION -->
+    <main>
+        <header>
+            <h2>Tablo Kontwòl Administratif</h2>
+            <div class="user-profile">
+                👑 Admin (Matricule: 310001)
+            </div>
+        </header>
+
+        <div class="content-body">
+            
+            <!-- MENU 3N 3ONGLET POU EVITE TÈP PAJ -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="chanjeTab(event, 'usersTab')">👥 Itilizatè yo</button>
+                <button class="tab-btn" onclick="chanjeTab(event, 'localisationsTab')">🏢 Depo & Lokalizasyon</button>
+                <button class="tab-btn" onclick="chanjeTab(event, 'produitsTab')">⚠️ Pwodui & Ekspirasyon</button>
+                <button class="tab-btn" onclick="chanjeTab(event, 'suiviTab')">📜 Rekizisyon & Mouvman</button>
+            </div>
+
+            <!-- 1. TAB ITILIZATÈ YO -->
+            <div id="usersTab" class="admin-tab-content">
+                <div class="card">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Jesyon Itilizatè ak Dwa Yo</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Matricule</th>
+                                <th>Non & Prenom</th>
+                                <th>Telefòn</th>
+                                <th>Wòl (Dwa)</th>
+                                <th>Estati</th>
+                                <th>Aksyon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>310001</strong></td>
+                                <td>Claudine Pierre-Louis</td>
+                                <td>+509 3700-0000</td>
+                                <td><select style="padding: 4px; border-radius: 4px;"><option>Admin</option><option selected>Gestionnaire</option><option>Magasinier</option></select></td>
+                                <td><span class="badge-active">Aktif</span></td>
+                                <td>
+                                    <button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Bani</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 2. TAB LOKALIZASYON / DEPO -->
+            <div id="localisationsTab" class="admin-tab-content" style="display: none;">
+                <div class="card">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Kontwòl Depo ak Zòn Stockaj</h3>
+                    
+                    <div style="margin-bottom: 20px; display: flex; gap: 12px;">
+                        <input type="text" placeholder="Non nouvo depo a..." style="padding: 8px; border-radius: var(--radius); border: 1px solid var(--border-color); flex: 1;">
+                        <button class="btn btn-primary">+ Ajoute yon Depo</button>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Non Depo / Lokalizasyon</th>
+                                <th>Tip Zòn</th>
+                                <th>Aksyon</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Depo Prensipal A</td>
+                                <td>Depot</td>
+                                <td>
+                                    <button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Enfim / Bani Depo</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Pwen Vant Caisse</td>
+                                <td>Zone Transit</td>
+                                <td>
+                                    <button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Enfim / Bani Depo</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. TAB PWODUI & EKSPIRASYON -->
+            <div id="produitsTab" class="admin-tab-content" style="display: none;">
+                <div class="card">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Pwodui ki Ekspire & Kontwòl Katalog</h3>
+                    <p style="color: var(--danger-red); font-size: 13px; margin-bottom: 16px;">⚠️ Lis pwodui sa yo depase dat peremption yo oswa prèt pou ekspire:</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kòd Pwodui</th>
+                                <th>Non Pwodui</th>
+                                <th>Nimewo Lot</th>
+                                <th>Dat Ekspirasyon</th>
+                                <th>Aksyon Administratif</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>MED-2026-0002</strong></td>
+                                <td>Paracetamol Bwat</td>
+                                <td>LOT-EXP-88</td>
+                                <td style="color: var(--danger-red); font-weight: 700;">2026-01-10 (Ekspire)</td>
+                                <td>
+                                    <button class="btn" style="background-color: var(--danger-red); color: white; padding: 4px 8px; font-size: 12px;">Retire / Delete Pwodui</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 4. TAB REKIZISYON AK MOUVMAN -->
+            <div id="suiviTab" class="admin-tab-content" style="display: none;">
+                <div class="card" style="margin-bottom: 24px;">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Rekizisyon ki Fèt yo</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N° Rekizisyon</th>
+                                <th>Moun ki Mande l</th>
+                                <th>Dat Demann</th>
+                                <th>Estati</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>REQ-2026-0001</td>
+                                <td>310001 - Claudine</td>
+                                <td>2026-06-07</td>
+                                <td><span style="color: #D97706; font-weight: 600;">An Attant</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Istwa Mouvman Stock yo (Traçabilité)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Atik</th>
+                                <th>Tip Mouvman</th>
+                                <th>Kantite</th>
+                                <th>Dat ak Lè</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MAN-2026-0001</td>
+                                <td><span style="color: var(--accent-green); font-weight: 600;">ENTREE</span></td>
+                                <td>100 Sak</td>
+                                <td>2026-06-01 14:30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- SCRIPT POU CHANJE ONGLET YO -->
+    <script>
+        function chanjeTab(evt, tabName) {
+            const contents = document.getElementsByClassName("admin-tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].style.display = "none";
+            }
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].className = buttons[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
