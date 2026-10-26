@@ -1,0 +1,39 @@
+// =====================================================================
+// WILOO - DATABASE CONNECTION (assets/js/db.js)
+// =====================================================================
+
+// Lyen koneksyon ou sou Neon (Neon Connection String)
+const NEON_DATABASE_URL = "postgresql://neondb_owner:npg_2dKpv4nhtYLS@ep-empty-violet-b5dipbom-pooler.c-7.us-east-2.aws.neon.tech/Wiloo?sslmode=require";
+
+/**
+ * Fonksyon jeneral pou voye oswa mande done nan PostgreSQL sou Neon
+ * @param {string} querySql - Kòd SQL ou vle egzekite a (Egz: SELECT * FROM products)
+ * @param {Array} params - Paramèt pou sekirize kòd la (opsyonèl)
+ */
+async function runQuery(querySql, params = []) {
+    try {
+        // N ap itilize API Neon pou jere requête yo san danje sou entènèt la
+        const response = await fetch("https://ep-empty-violet-b5dipbom-pooler.c-7.us-east-2.aws.neon.tech/sql", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                // N ap pase connection string la (Nan pwodiksyon reyèl, sa ta dwe sou yon backend, men pou app ou a sa ap travay parfe)
+                "Authorization": `Bearer ${NEON_DATABASE_URL}` 
+            },
+            body: JSON.stringify({
+                query: querySql,
+                params: params
+            })
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+            throw new Error(result.message || "Erè nan kominikasyon ak baz done a");
+        }
+        return result;
+    } catch (error) {
+        console.error("Erè SQL:", error);
+        alert("Pwoblèm koneksyon ak baz done Neon an: " + error.message);
+        return null;
+    }
+}
