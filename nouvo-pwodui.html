@@ -14,9 +14,10 @@
             <h1>Wi<span>loo</span></h1>
             <nav>
                 <a href="index.html">📊 Tablo Bò (Dashboard)</a>
-                <a href="produit.html">🔍 Rechèch & Fich Pwodui</a>
+                <a href="produit.html">🔍 Rechèch & Liste Pwodui</a>
                 <a href="nouvo-pwodui.html" class="active">➕ Anrejistre Pwodui</a>
                 <a href="requisitions.html">📝 Rekizisyon yo</a>
+                <a href="admin.html">🛡️ Admin</a>
             </nav>
         </div>
         <div class="user-footer" style="font-size: 12px; color: #64748B;">
@@ -29,7 +30,7 @@
         <header>
             <h2>Katalòg - Ajoute yon Nouvo Pwodui</h2>
             <div class="user-profile">
-                👤 Magajinyè (Matricule: 310001)
+                👤 Magajinyè
             </div>
         </header>
 
@@ -37,17 +38,14 @@
             
             <div class="card" style="max-width: 800px; margin: 0 auto;">
                 <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Fòm Anrejistreman Pwodui</h3>
-                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px;">Kòd inik pwodui a ap jere otomatikman pa sistèm nan baze sou kategori w chwazi a.</p>
                 
                 <form id="addNewProductForm">
                     
-                    <!-- 1. Non Pwodui -->
                     <div style="margin-bottom: 16px;">
                         <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Non Pwodui a:</label>
-                        <input type="text" id="nomArticle" placeholder="Egzanp: Diri Wawa 50KG oswa Paracetamol 500mg" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;" required>
+                        <input type="text" id="nomArticle" placeholder="Egzanp: Diri Wawa 50KG" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;" required>
                     </div>
 
-                    <!-- 2. Kategori ak Fòm -->
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
                         <div>
                             <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Kategori:</label>
@@ -59,49 +57,11 @@
                             </select>
                         </div>
                         <div>
-                            <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Fòm / Anbalaj:</label>
-                            <select id="idForme" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;" required>
-                                <option value="">-- Chwazi Fòm --</option>
-                                <option value="1">Sak</option>
-                                <option value="2">Bwat</option>
-                                <option value="3">Tono</option>
-                                <option value="4">Moso / Inite</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- 3. Founisè ak Pri Acha -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
-                        <div>
-                            <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Founisè Prensipal:</label>
-                            <select id="idFournisseur" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;">
-                                <option value="">-- Chwazi Founisè --</option>
-                                <option value="1">Importateur S.A.</option>
-                                <option value="2">Global Trading Corp</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Pri Acha:</label>
-                            <input type="number" id="prixAchat" step="0.01" placeholder="0.00" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;">
-                        </div>
-                    </div>
-
-                    <!-- 4. Depo Inisyal ak Kantite -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
-                        <div>
-                            <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Depo Premye Antre:</label>
-                            <select id="idLocalisation" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;">
-                                <option value="1">Depo Prensipal A</option>
-                                <option value="2">Depo Segondè B</option>
-                            </select>
-                        </div>
-                        <div>
                             <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Kantite Inisyal:</label>
                             <input type="number" id="quantite" placeholder="Egzanp: 100" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;" required>
                         </div>
                     </div>
 
-                    <!-- 5. Nimewo Lot ak DAT EKSPIRASYON -->
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
                         <div>
                             <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Nimewo Lot (Batch No):</label>
@@ -113,8 +73,7 @@
                         </div>
                     </div>
 
-                    <!-- 6. Bouton Anrejistre -->
-                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 16px;">Anrejistre Pwodui a</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 16px;">Anrejistre nan Baz Done SQL</button>
 
                 </form>
             </div>
@@ -122,39 +81,31 @@
         </div>
     </main>
 
-    <!-- SCRIPT POU KONEKSYON AK NEON / POSTGRESQL -->
-    <script>
+    <!-- SCRIPT KONEKSYON -->
+    <script src="assets/js/app.js"></script>
+    <script type="module">
+        import { runQuery } from './assets/js/db.js';
+
         document.getElementById('addNewProductForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // Kolekte tout done nan fòm nan
-            const productData = {
-                nom_article: document.getElementById('nomArticle').value,
-                id_categorie: parseInt(document.getElementById('idCategorie').value),
-                id_forme: parseInt(document.getElementById('idForme').value),
-                id_fournisseur: parseInt(document.getElementById('idFournisseur').value),
-                prix_achat: parseFloat(document.getElementById('prixAchat').value) || 0.00,
-                id_localisation: parseInt(document.getElementById('idLocalisation').value),
-                quantite: parseFloat(document.getElementById('quantite').value),
-                numero_lot: document.getElementById('numeroLot').value,
-                date_peremption: document.getElementById('datePeremption').value || null
-            };
+            const nomArticle = document.getElementById('nomArticle').value;
+            const idCategorie = document.getElementById('idCategorie').value;
+            const quantite = document.getElementById('quantite').value;
+            const numeroLot = document.getElementById('numeroLot').value || null;
+            const datePeremption = document.getElementById('datePeremption').value || null;
 
-            try {
-                // Remak: Nan yon anviwonman reyèl, w ap voye sa nan yon API backend (Node.js/Python) 
-                // ki konekte ak lyen Neon w la: 
-                // postgresql://neondb_owner:npg_2dKpv4nhtYLS@ep-empty-violet-b5dipbom-pooler.c-7.us-east-2.aws.neon.tech/Wiloo?sslmode=require
-                
-                console.log("Done ki pral voye nan baz done Wiloo:", productData);
-                
-                alert("Pwodui a anrejistre avèk siksè nan sistèm Wiloo a! Kòd inik la ak stock la kreye otomatikman.");
-                
-                // Efase fòm nan apre siksè
+            // KÒD SQL INSERT REYÈL POU ANREJISTRE NAN NEON
+            const sqlQuery = `
+                INSERT INTO products (nom_article, id_categorie, stock_actuel, numero_lot, date_peremption) 
+                VALUES ($1, $2, $3, $4, $5);
+            `;
+            
+            const result = await runQuery(sqlQuery, [nomArticle, idCategorie, quantite, numeroLot, datePeremption]);
+            
+            if(result !== null) {
+                alert("Pwodui a anrejistre epi estoke nan baz done PostgreSQL sou Neon an!");
                 document.getElementById('addNewProductForm').reset();
-
-            } catch (error) {
-                console.error("Erè pandan anrejistreman an:", error);
-                alert("Yon erè fèt pandan n t ap anrejistre pwodui a.");
             }
         });
     </script>
