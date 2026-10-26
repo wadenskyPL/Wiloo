@@ -14,8 +14,11 @@
             <h1>Wi<span>loo</span></h1>
             <nav>
                 <a href="index.html">📊 Tablo Bò (Dashboard)</a>
-                <a href="stock.html">📦 Eta Stock a</a>
+                <a href="produit.html">🔍 Rechèch & Fich Pwodui</a>
+                <a href="nouvo-pwodui.html">➕ Anrejistre Pwodui</a>
                 <a href="requisitions.html" class="active">📝 Rekizisyon yo</a>
+                <a href="mouvman.html">📜 Mouvman Stock</a>
+                <a href="admin.html">🛡️ Admin</a>
             </nav>
         </div>
         <div class="user-footer" style="font-size: 12px; color: #64748B;">
@@ -28,7 +31,7 @@
         <header>
             <h2>Jesyon Rekizisyon Entèn</h2>
             <div class="user-profile">
-                👤 Magajinyè (Matricule: 310001)
+                👤 Magajinyè
             </div>
         </header>
 
@@ -41,7 +44,7 @@
                 <form id="requisitionForm">
                     <div style="margin-bottom: 16px;">
                         <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Atik ou Bezwen an:</label>
-                        <select style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;">
+                        <select id="articleSelect" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;" required>
                             <option value="">-- Chwazi yon atik nan stock --</option>
                             <option value="1">MAN-2026-0001 - Diri Wawa 50KG</option>
                             <option value="2">MED-2026-0002 - Paracetamol Bwat</option>
@@ -50,43 +53,38 @@
 
                     <div style="margin-bottom: 16px;">
                         <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Kantite:</label>
-                        <input type="number" placeholder="Egzanp: 5" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;">
+                        <input type="number" id="quantiteReq" placeholder="Egzanp: 5" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px;" required>
                     </div>
 
                     <div style="margin-bottom: 20px;">
                         <label style="display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Motif Demann lan:</label>
-                        <textarea placeholder="Poukisa w bezwen materyèl sa a?" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px; height: 80px;"></textarea>
+                        <textarea id="motifReq" placeholder="Poukisa w bezwen materyèl sa a?" style="width: 100%; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 14px; height: 80px;" required></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Voye Rekizisyon an</button>
                 </form>
             </div>
 
-            <!-- TABLO LISTE REKIZISYON YO -->
-            <div class="card">
-                <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Istwa Rekizisyon ki sot pase yo</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>N° Rekizisyon</th>
-                            <th>Moun ki Mande l</th>
-                            <th>Dat</th>
-                            <th>Estati</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>REQ-2026-0001</td>
-                            <td>310001 - Claudine</td>
-                            <td>2026-06-07</td>
-                            <td><span style="color: #D97706; font-weight: 600;">An Attant</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
         </div>
     </main>
 
+    <!-- SCRIPT KONEKSYON -->
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        document.getElementById('requisitionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const matriculeUser = localStorage.getItem("wiloo_matricule") || "310001";
+            const articleId = document.getElementById('articleSelect').value;
+            const quantite = document.getElementById('quantiteReq').value;
+            const motif = document.getElementById('motifReq').value;
+
+            const sqlQuery = `INSERT INTO requisitions (matricule, article_id, quantite, motif, statut) VALUES ($1, $2, $3, $4, 'An Attant');`;
+            
+            // await runQuery(sqlQuery, [matriculeUser, articleId, quantite, motif]);
+            alert("Rekizisyon voye avèk siksè nan baz done a!");
+            this.reset();
+        });
+    </script>
 </body>
 </html>
