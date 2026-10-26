@@ -12,6 +12,7 @@
             justify-content: center;
             height: 100vh;
             background-color: var(--primary-navy);
+            margin: 0;
         }
         .login-card {
             background-color: var(--card-bg);
@@ -63,7 +64,7 @@
         </div>
     </div>
 
-    <!-- Lojik JavaScript pou Koneksyon -->
+    <!-- Lojik JavaScript pou Koneksyon ak Sesyon -->
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -71,9 +72,13 @@
             const matricule = document.getElementById('matriculeInput').value.trim();
             const password = document.getElementById('passwordInput').value;
 
-            // Tcheke si matricule a kòmanse ak 31 jan nou te deside l la
+            // Tcheke si matricule a kòmanse ak 31 epi li gen 6 chif
             if(matricule.startsWith('31') && matricule.length === 6) {
+                // Anrejistre matricule a nan memwa navigatè a pou app.js rekonèt li
+                localStorage.setItem("wiloo_matricule", matricule);
+                
                 alert("Byenveni! Koneksyon an reyisi pou matricule: " + matricule);
+                
                 // Voye itilizatè a sou Dashboard la
                 window.location.href = "index.html";
             } else {
