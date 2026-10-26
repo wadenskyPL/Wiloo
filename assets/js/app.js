@@ -1,27 +1,22 @@
 // =====================================================================
-// WILOO - GLOBAL APP SCRIPT (assets/js/app.js)
+// WILOO - GLOBAL SECURITY & APP SCRIPT (assets/js/app.js)
 // =====================================================================
 
-// Konfigirasyon Prensipal Sistèm Nan
-const WILOO_CONFIG = {
-    appName: "Wiloo ERP",
-    version: "1.0.0",
-    dbConnection: "Neon PostgreSQL"
-};
-
-// 1. Tcheke Sesyon Itilizatè a otomatikman sou tout paj yo
 document.addEventListener("DOMContentLoaded", function() {
+    // Pran adrès paj kote itilizatè a ye a kounye a
     const pageActuelle = window.location.pathname;
     
-    // Si nou pa sou paj login lan, nou dwe tcheke si itilizatè a konekte
+    // Si itilizatè a PA sou paj login lan
     if (!pageActuelle.includes("login.html")) {
+        // Al chache matricule a nan memwa navigatè a (localStorage)
         const activeUser = localStorage.getItem("wiloo_matricule");
         
+        // Si pa gen okenn itilizatè ki konekte
         if (!activeUser) {
-            // Si pa gen itilizatè ki anrejistre nanmemwa navigatè a, voye l sou login
+            // Voye l tounen sou paj login lan fòs
             window.location.href = "login.html";
         } else {
-            // Si l konekte, nou ka mete non l oswa matricule l nan header a si l egziste
+            // Si l konekte tout bon, mete matricule li nan header a otomatikman
             const profileElement = document.querySelector(".user-profile");
             if (profileElement && !profileElement.innerText.includes(activeUser)) {
                 profileElement.innerHTML = `👤 Mat: ${activeUser}`;
@@ -30,14 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// 2. Fonksyon pou Dekonekte (Logout)
+// Fonksyon pou Dekonekte (Logout) si w vle ajoute yon bouton dekoneksyon pita
 function wilooLogout() {
     localStorage.removeItem("wiloo_matricule");
-    localStorage.removeItem("wiloo_role");
     window.location.href = "login.html";
-}
-
-// 3. Fonksyon Global pou Notifikasyon Pwòp
-function wilooAlert(message, type = "success") {
-    alert(message); // Ou ka ranplase sa ak yon bèl bwat modèn pita
 }
