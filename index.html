@@ -3,8 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiloo - Jesyon Stock Pwofesyonèl</title>
+    <title>Wiloo - Tablo Bò (Dashboard)</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-navy);
+        }
+        .stat-card.alert {
+            border-left-color: var(--danger-red);
+        }
+        .quick-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .quick-btn {
+            background-color: var(--primary-navy);
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .quick-btn.green {
+            background-color: var(--accent-green);
+        }
+        .notification-box {
+            background-color: #FEF2F2;
+            border: 1px solid #FCA5A5;
+            padding: 16px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+        }
+    </style>
 </head>
 <body>
 
@@ -14,8 +60,11 @@
             <h1>Wi<span>loo</span></h1>
             <nav>
                 <a href="index.html" class="active">📊 Tablo Bò (Dashboard)</a>
-                <a href="stock.html">📦 Eta Stock a</a>
+                <a href="produit.html">🔍 Rechèch & Liste Pwodui</a>
+                <a href="nouvo-pwodui.html">➕ Anrejistre Pwodui</a>
                 <a href="requisitions.html">📝 Rekizisyon yo</a>
+                <a href="mouvman.html">📜 Mouvman Stock</a>
+                <a href="admin.html">🛡️ Admin</a>
             </nav>
         </div>
         <div class="user-footer" style="font-size: 12px; color: #64748B;">
@@ -26,24 +75,133 @@
     <!-- MAIN SECTION -->
     <main>
         <header>
-            <h2>Tablo Bò Prensipal</h2>
+            <h2>Tablo Bò Prensipal (Dashboard)</h2>
             <div class="user-profile">
-                Byenveni, 👤 Magajinyè (Matricule: 310001)
+                👤 Magajinyè
             </div>
         </header>
 
         <div class="content-body">
-            <div class="card">
-                <h3 style="color: var(--primary-navy); margin-bottom: 12px;">Aksyon Rapid</h3>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Chwazi yon aksyon pou w kòmanse jere stock la oswa voye yon demann.</p>
-                
-                <div style="display: flex; gap: 16px;">
-                    <a href="requisitions.html" class="btn btn-primary">+ Fè yon nouvo Rekizisyon</a>
-                    <a href="stock.html" class="btn btn-navy">Konsilte Depo yo</a>
+            
+            <!-- FLYOUT / NOTIFIKASYON PWODUI KI EKPIRE -->
+            <div id="flyoutNotifications" class="notification-box" style="display: none;">
+                <h4 style="color: var(--danger-red); margin-bottom: 8px;">⚠️ Alèt Enpòtan: Pwodui ki Ekspire oswa prèt pou ekspire!</h4>
+                <p id="notificationText" style="font-size: 14px; color: #7F1D1D; margin: 0;">Gen pwodui nan sistèm nan ki depase dat peremption yo.</p>
+            </div>
+
+            <!-- BOUTON AKSYON RAPID -->
+            <div class="quick-actions">
+                <a href="produit.html" class="quick-btn">🔍 Chache yon Pwodui</a>
+                <a href="mouvman.html" class="quick-btn green">🔄 Transfere yon Pwodui</a>
+                <a href="requisitions.html" class="quick-btn">📝 Reponn a yon Rekizisyon</a>
+            </div>
+
+            <!-- STATISTIK KANTITE PA KATEGORI -->
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <h3 style="color: var(--primary-navy); margin-bottom: 12px; font-size: 16px;">📦 Total Stock pa Kategori</h3>
+                    <ul id="categorieStatsList" style="list-style: none; padding: 0; margin: 0; font-size: 14px;">
+                        <li>K ap chaje done yo nan baz SQL...</li>
+                    </ul>
+                </div>
+
+                <div class="stat-card alert">
+                    <h3 style="color: var(--danger-red); margin-bottom: 12px; font-size: 16px;">⚠️ Pwodui ki Ekspire</h3>
+                    <p id="expiredCount" style="font-size: 24px; font-weight: bold; color: var(--danger-red); margin: 0;">0</p>
+                    <span style="font-size: 12px; color: var(--text-muted);">Atik ki bezwen retire imedyatman.</span>
                 </div>
             </div>
+
+            <!-- DÈNIÈ REKIZISYON AK MOUVMAN -->
+            <div class="card">
+                <h3 style="color: var(--primary-navy); margin-bottom: 16px;">Dènye Demann Rekizisyon ki An Attant</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° Rekizisyon</th>
+                            <th>Moun ki Mande l</th>
+                            <th>Dat</th>
+                            <th>Estati</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboardRequisitionsTbody">
+                        <tr><td colspan="4">K ap chaje rekizisyon yo...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </main>
 
+    <!-- SCRIPT KONEKSYON AK NEON SQL -->
+    <script src="assets/js/app.js"></script>
+    <script type="module">
+        import { runQuery } from './assets/js/db.js';
+
+        document.addEventListener("DOMContentLoaded", async function() {
+            await chajeStatistiquesDashboard();
+        });
+
+        async function chajeStatistiquesDashboard() {
+            try {
+                // 1. SELECT KANTITE PA KATEGORI
+                const catData = await runQuery(`
+                    SELECT c.nom_categorie, SUM(p.stock_actuel) as total_stock 
+                    FROM products p 
+                    LEFT JOIN categories c ON p.id_categorie = c.id 
+                    GROUP BY c.nom_categorie;
+                `);
+
+                const catList = document.getElementById("categorieStatsList");
+                if (catData && catData.length > 0) {
+                    catList.innerHTML = "";
+                    catData.forEach(item => {
+                        catList.innerHTML += `<li style="padding: 6px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;"><span>${item.nom_categorie || 'Jeneral'}:</span> <strong>${item.total_stock || 0} inite</strong></li>`;
+                    });
+                } else {
+                    catList.innerHTML = "<li>Pa gen done kategori disponib.</li>";
+                }
+
+                // 2. SELECT PWODUI KI EKPIRE (Pèmet afiche Flyout Notifikasyon an)
+                const expiredData = await runQuery(`
+                    SELECT COUNT(*) as expired_count FROM products WHERE date_peremption < CURRENT_DATE;
+                `);
+
+                if (expiredData && expiredData.length > 0) {
+                    const count = expiredData[0].expired_count;
+                    if (count > 0) {
+                        document.getElementById("expiredCount").innerText = count;
+                        document.getElementById("notificationText").innerText = `Gen ${count} pwodui nan baz done a ki depase dat ekspirasyon yo. Tanpri al nan seksyon Admin pou retire yo.`;
+                        document.getElementById("flyoutNotifications").style.display = "block";
+                    }
+                }
+
+                // 3. SELECT DÈNIÈ REKIZISYON YO
+                const reqData = await runQuery(`
+                    SELECT id, matricule, date_demande, statut FROM requisitions ORDER BY id DESC LIMIT 5;
+                `);
+
+                const reqTbody = document.getElementById("dashboardRequisitionsTbody");
+                if (reqData && reqData.length > 0) {
+                    reqTbody.innerHTML = "";
+                    reqData.forEach(r => {
+                        reqTbody.innerHTML += `
+                            <tr>
+                                <td>REQ-${r.id}</td>
+                                <td>Mat: ${r.matricule}</td>
+                                <td>${r.date_demande || 'Jodi a'}</td>
+                                <td><span style="color: #D97706; font-weight: 600;">${r.statut}</span></td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    reqTbody.innerHTML = "<tr><td colspan='4'>Pa gen okenn rekizisyon pou kounye a.</td></tr>";
+                }
+
+            } catch (err) {
+                console.error("Erè nan chaje dashboard la:", err);
+            }
+        }
+    </script>
 </body>
 </html>
